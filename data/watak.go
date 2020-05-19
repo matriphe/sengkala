@@ -40,7 +40,7 @@ var Watak = map[int][][]string{
 	},
 	3: {
 		{"bahni", "tiga", "ujwala", "kaèksi"},
-		{"katon", "murub", "dahana", "payudah"},
+		{"katon", "murub", "dahana", "payudan"},
 		{"katingalan", "kaya", "bentèr"},
 		{"nala", "uninga", "kawruh"},
 		{"lir", "wrin", "wéda", "naut", "nauti"},
@@ -96,7 +96,7 @@ var Watak = map[int][][]string{
 		{"tunggang", "turangga", "gung"},
 		{"swa", "aswa", "titihan", "kuda"},
 		{"ajar", "arga", "sabda", "nabda", "angsa", "muni"},
-		{"suka", "biksu", "biskuka"},
+		{"suka", "biksu", "biksuka"},
 	},
 	8: {
 		{"astha", "basu", "anggusthi", "basuki"},
