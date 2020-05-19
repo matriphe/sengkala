@@ -2,9 +2,10 @@ package sengkala
 
 import (
 	"fmt"
-	"sengkala/data"
 	"strconv"
 	"strings"
+
+	"github.com/matriphe/sengkala/data"
 )
 
 type (

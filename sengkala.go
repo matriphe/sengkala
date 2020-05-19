@@ -1,8 +1,9 @@
 package sengkala
 
 import (
-	"sengkala/data"
 	"time"
+
+	"github.com/matriphe/sengkala/data"
 
 	"github.com/RadhiFadlillah/go-hijri"
 )
