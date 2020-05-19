@@ -1,7 +1,10 @@
 package data
 
+// MeaningType represents meaning type
+type MeaningType = map[string]map[string]string
+
 // Meaning holds meaning data
-var Meaning = map[string]map[string]string{
+var Meaning = MeaningType{
 	"acala": {
 		"id": "gunung",
 		"jv": "(S) kw gunung.",

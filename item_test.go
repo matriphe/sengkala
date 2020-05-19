@@ -2,53 +2,64 @@ package sengkala
 
 import (
 	"fmt"
-	"strconv"
+	"sengkala/data"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
-type RandomizerMock struct {
-	mock.Mock
+type (
+	RandomizerMock struct {
+		mock.Mock
+	}
+
+	expected struct {
+		expectedYear     int
+		expectedSengkala string
+		expectedMeaning  map[string]string
+	}
+)
+
+var testItemData = map[int]expected{
+	1984: {
+		expectedYear:     1984,
+		expectedSengkala: "Udaka Tekèk Wilasita Pamasé",
+		expectedMeaning: map[string]string{
+			"Udaka":    "air",
+			"Tekèk":    "tokek",
+			"Wilasita": "liang, liang kumbang",
+			"Pamasé":   "raja",
+		},
+	},
+	2020: {
+		expectedYear:     2020,
+		expectedSengkala: "Gegana Sikara Gegana Sikara",
+		expectedMeaning: map[string]string{
+			"Gegana": "angkasa, langit",
+			"Sikara": "pengacauan, tangan, campur tangan.",
+		},
+	},
 }
 
 func (m *RandomizerMock) GetRandom(maxNum int) int {
 	return 2
 }
 
-func TestGetSengkala(t *testing.T) {
-	for year, expected := range map[string][]string{
-		"1984": {"Udaka", "Tekèk", "Wilasita", "Pamasé"},
-		"2020": {"Gegana", "Sikara", "Gegana", "Sikara"},
-	} {
-		t.Run(fmt.Sprintf("year_%s", year), func(t *testing.T) {
-			actual := GetSengkala(year, new(RandomizerMock))
-			assert.Equal(t, expected, actual)
-		})
-	}
-}
-
 func TestItem(t *testing.T) {
-	_, abcErr := strconv.Atoi("abc")
-	_, emptyErr := strconv.Atoi("")
+	d := dictionary{
+		watak:      data.Watak,
+		meaning:    data.Meaning,
+		Randomizer: new(RandomizerMock),
+	}
 
-	for year, expected := range map[string]item{
-		"1984": {
-			year:     1984,
-			err:      nil,
-		},
-		"abc": {
-			err: abcErr,
-		},
-		"": {
-			err: emptyErr,
-		},
-	} {
-		t.Run(fmt.Sprintf("year_%s", year), func(t *testing.T) {
-			actual := newItem(year)
-			assert.Equal(t, expected.year, actual.year)
-			assert.Equal(t, expected.err, actual.err)
+	for year, expected := range testItemData {
+		t.Run(fmt.Sprintf("item_%d", year), func(t *testing.T) {
+			item := newItem(year, d)
+
+			assert.Equal(t, expected.expectedYear, item.GetYear())
+			assert.Equal(t, expected.expectedSengkala, item.GetSengkala())
+			assert.Equal(t, expected.expectedMeaning, item.GetMeaning())
 		})
 	}
 }

@@ -1,7 +1,10 @@
 package data
 
+// WatakType represents watak type
+type WatakType = map[int][][]string
+
 // Watak holds watak data
-var Watak = map[int][][]string{
+var Watak = WatakType{
 	0: {
 		{"byoma", "musna", "nis", "mlethik", "langit"},
 		{"sirna", "ilang", "kombul", "awang-awang"},
